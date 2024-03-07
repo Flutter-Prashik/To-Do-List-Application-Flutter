@@ -92,18 +92,17 @@ class _HomePageState extends State<HomePage> {
         toDoModalobj.date = dateEditingController.text.trim();
       }
     } else {
-      // final snackBar = SnackBar(
-      //   margin: const EdgeInsets.all(16),
-      //   content: Text(
-      //     'None of the fields can be empty !',
-      //     style:
-      //         GoogleFonts.quicksand(fontSize: 12, fontWeight: FontWeight.w600),
-      //   ),
-      // );
+      final snackBar = SnackBar(
+        content: Text(
+          'None of the fields can be empty !',
+          style:
+              GoogleFonts.quicksand(fontSize: 12, fontWeight: FontWeight.w600),
+        ),
+      );
 
-      // // Find the ScaffoldMessenger in the widget tree
-      // // and use it to show a SnackBar.
-      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
