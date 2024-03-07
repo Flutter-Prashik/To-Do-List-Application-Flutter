@@ -118,35 +118,31 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context) {
         return Padding(
           padding: MediaQuery.of(context).viewInsets,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Text(
-                  'Create Task',
-                  style: GoogleFonts.quicksand(
-                      fontSize: 22, fontWeight: FontWeight.w600),
-                ),
-              ),
-              SizedBox(
-                width: 330,
-                child: Row(
-                  children: [
-                    Text(
-                      'Title',
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Center(
+                    child: Text(
+                      'Create Task',
                       style: GoogleFonts.quicksand(
-                          fontSize: 11, fontWeight: FontWeight.w400),
-                    )
-                  ],
+                          fontSize: 22, fontWeight: FontWeight.w600),
+                    ),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
+                Text(
+                  'Title',
+                  style: GoogleFonts.quicksand(
+                      fontSize: 11, fontWeight: FontWeight.w400),
+                ),
+                SizedBox(
                   height: 40,
-                  width: 330,
+                  // width: 330,
                   child: TextField(
                     controller: titleEditingController,
                     style: GoogleFonts.quicksand(
@@ -165,23 +161,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 330,
-                child: Row(
-                  children: [
-                    Text(
-                      'Description',
-                      style: GoogleFonts.quicksand(
-                          fontSize: 11, fontWeight: FontWeight.w400),
-                    )
-                  ],
+                Text(
+                  'Description',
+                  style: GoogleFonts.quicksand(
+                      fontSize: 11, fontWeight: FontWeight.w400),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: 330,
+                SizedBox(
+                  // width: 330,
                   child: TextField(
                     controller: descriptionEditingController,
                     style: GoogleFonts.quicksand(
@@ -201,24 +187,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 330,
-                child: Row(
-                  children: [
-                    Text(
-                      'Date',
-                      style: GoogleFonts.quicksand(
-                          fontSize: 11, fontWeight: FontWeight.w400),
-                    )
-                  ],
+                Text(
+                  'Date',
+                  style: GoogleFonts.quicksand(
+                      fontSize: 11, fontWeight: FontWeight.w400),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
+                SizedBox(
                   height: 40,
-                  width: 330,
+                  // width: 330,
                   child: TextField(
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
@@ -252,42 +228,148 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (isEdit) {
-                        submit(isEdit, toDoModalobj);
-                      } else {
-                        submit(isEdit);
-                      }
-                    });
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        if (isEdit) {
+                          submit(isEdit, toDoModalobj);
+                        } else {
+                          submit(isEdit);
+                        }
+                      });
 
-                    Navigator.of(context).pop();
-                    titleEditingController.clear();
-                    descriptionEditingController.clear();
-                    dateEditingController.clear();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(300, 50),
-                      backgroundColor: const Color.fromARGB(255, 0, 139, 148),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    'Submit',
-                    style: GoogleFonts.quicksand(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                      Navigator.of(context).pop();
+                      titleEditingController.clear();
+                      descriptionEditingController.clear();
+                      dateEditingController.clear();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(300, 50),
+                        backgroundColor: const Color.fromARGB(255, 0, 139, 148),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    child: Text(
+                      'Submit',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+
+  Padding myCard(int index) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: colorList[index % colorList.length],
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+              blurRadius: 10,
+              spreadRadius: 1,
+              offset: Offset(0, 10),
+            )
+          ],
+        ),
+        width: double.infinity,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        height: 40,
+                        width: 40,
+                        child: Image.asset('assets/img.png'),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    list[index].date,
+                    style: GoogleFonts.quicksand(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      list[index].title,
+                      style: GoogleFonts.quicksand(
+                          fontSize: 12, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      list[index].description,
+                      style: GoogleFonts.quicksand(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            editCard(list[index]);
+                          },
+                          child: const Icon(
+                            Icons.edit,
+                            size: 15,
+                            color: Color(0xff008B94),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            deleteCard(list[index]);
+                          },
+                          child: const Icon(
+                            Icons.delete_outline_outlined,
+                            size: 15,
+                            color: Color(0xff008B94),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -318,108 +400,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView.builder(
           itemCount: list.length,
           itemBuilder: ((context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: colorList[index % colorList.length],
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.1),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      offset: Offset(0, 10),
-                    )
-                  ],
-                ),
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                height: 40,
-                                width: 40,
-                                child: Image.asset('assets/img.png'),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            list[index].date,
-                            style: GoogleFonts.quicksand(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              list[index].title,
-                              style: GoogleFonts.quicksand(
-                                  fontSize: 12, fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              list[index].description,
-                              style: GoogleFonts.quicksand(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    editCard(list[index]);
-                                  },
-                                  child: const Icon(
-                                    Icons.edit,
-                                    size: 15,
-                                    color: Color(0xff008B94),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    deleteCard(list[index]);
-                                  },
-                                  child: const Icon(
-                                    Icons.delete_outline_outlined,
-                                    size: 15,
-                                    color: Color(0xff008B94),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return myCard(index);
           }),
         ),
       ),
